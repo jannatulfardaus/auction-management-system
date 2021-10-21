@@ -20,7 +20,6 @@ class CreatePaymentsTable extends Migration
             $table->integer('amount');
             $table->integer('user_id');
             $table->string('pay_at');
-            $table->string('month');
             $table->string('status')->default('pending');
             $table->timestamps();
 

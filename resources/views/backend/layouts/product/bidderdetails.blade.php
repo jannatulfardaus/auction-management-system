@@ -8,7 +8,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">User Name</th>
-            <th scope="col">Product Price</th>
+            <th scope="col">Product id</th>
             <th scope="col">Bid Price</th>
             <th scope="col">Status</th>
             <th scope="col">Action</th>
@@ -20,7 +20,7 @@
             <tr>
                 <th scope="row">1</th>
                 <td>{{$data->user->name}}</td>
-                <td>{{$data->product->base_price}}</td>
+                <td>{{$data->product->id}}</td>
                 <td>{{$data->price}}</td>
                 <td>{{$data->status}} </td>
             
@@ -29,7 +29,7 @@
                 <a href="{{route('bidder.approve',$data->id)}}" class="btn btn-primary">
                
                 @if($data->status == 'pending')
-                    <span class="label-custom label label-success"> Looser </span>
+                    <span class="label-custom label label-success"> Failure </span>
 
                     @else
 

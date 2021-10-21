@@ -9,8 +9,8 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Product Name</th>
-            <th scope="col">base price</th>
-            <th scope="col">sold price</th>
+            <th scope="col">Starting price</th>
+            <th scope="col">Regular price</th>
         </tr>
         </thead>
         <tbody>

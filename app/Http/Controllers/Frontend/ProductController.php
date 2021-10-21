@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Bid;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ProductController extends Controller
 {
@@ -21,22 +22,38 @@ class ProductController extends Controller
 
     public function bidNow(Request $request)
     {
-        //STEP 1 GET LATEST BID AMOUNT
-        $heighstBid=Bid::where('product_id',$request->product_id)->orderBy('price','desc')->first();
+        // //STEP 1 GET LATEST BID AMOUNT
+        $heighestBid=Bid::where('product_id',$request->product_id)->orderBy('price','desc')->first();
+        $product=Product::find($request->product_id);
 
-        //STEP 2 CHECK REQUEST AMOUNT GREATER THEN LAST HEIGHST BID AMOUNT
+        $highestPrice=$heighestBid?$heighestBid->price:$product->base_price;
 
-        if($heighstBid->price<$request->price)
+
+        
+
+        //check expire date
+        if(date("Y-m-d",strtotime($product->expired_date))>=date('Y-m-d'))
         {
-            $bids=Bid::create([
-                'user_id' => auth()->user()->id,
-                'product_id' => $request->product_id,
-                'price' => $request->price,
-                'status' => 'pending'
-            ]);
-            return redirect()->back()->with('success','successfully');
+           // //STEP 2 CHECK REQUEST AMOUNT GREATER THEN LAST HEIGHST BID AMOUNT
+
+            if($highestPrice<$request->price)
+            {   
+                $bids=Bid::create([
+                    'user_id' => auth()->user()->id,
+                    'product_id' => $request->product_id,
+                    'price' => $request->price,
+                    'status' => 'pending'
+                ]);
+                
+                return redirect()->back()->with('success','successfully');
+            }
+            return redirect()->back()->with('success','your bid should be higher than current bid');
         }
-        return redirect()->back()->with('success','your bid should be higher than current bid');
+        else{
+            return redirect()->back()->with('success','Date expire.');
+        }
+
+        
         
      }
     

@@ -4,25 +4,32 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Payment;
+use App\Models\Bid;
 
 class Paymentcontroller extends Controller
 {
-    public function paymentmethod()
-    {
-        return view('Frontend.layouts.payment');
+    public function paymentmethod($id)
+    {   
+    
+        $bid=Bid::where('user_id',$id)->first();
+        
+        return view('Frontend.layouts.payment',compact('bid'));
     }
-    public function postpayment(Request $request)
+    public function paymentstore(Request $request)
     {
+      
 
-        User::Create([
-            'name'=>$request->name,
-           'email'=>$request->email,
-           'password'=>bcrypt($request->password),
-           'address'=>$request->address,
-           'role'=>'customer',
-           'Phone_Number'=>$request->Phone_Number,
+        payment::Create([
+           'bid_id'=>$request->bid_id,
+           'amount'=>$request->amount,
+           'user_id'=> $request->user_id,
+           'pay_at'=>$request->date,
+           
+         
         ]);
-        return redirect()->back()->with('success','User Registration Successful.');
+        
+        return redirect()->back()->with('success','payment successfully');
    
     }
 }

@@ -10,9 +10,16 @@ class Product extends Model
 {
     use HasFactory;
     protected $guarded=[];
+
     public function catagory()
     {
         return $this->belongsTo(Catagories::class,'Category_id','id');
+    
+    }
+
+ public function seller()
+    {
+        return $this->belongsTo(User::class,'user_id','id');
     
     }
 

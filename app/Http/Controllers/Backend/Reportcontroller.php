@@ -18,8 +18,10 @@ class Reportcontroller extends Controller
         return view('backend.layouts.report',compact('bids'));
     }
     public function datewisebid(Request $request)
-    {
-       $bids=Bid::whereBetween('created_at',[$request->date,$request->date1])->get(); 
+    {  
+       $bids=Bid::whereBetween('created_at',[$request->date,$request->date1])->get();
+
+       
        return view('backend.layouts.report',compact('bids'));
     }
 

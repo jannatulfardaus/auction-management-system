@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\BidController;
 use App\Http\Controllers\Frontend\Paymentcontroller;
+use App\Http\Controllers\Backend\Paymentcontroller as BackendPaymentcontroller;
 use App\Http\Controllers\Backend\Reportcontroller;
 use App\Http\Controllers\Frontend\ProductController as HomeProductController;
 use App\Http\Controllers\Backend\UserController as BackendUser;
@@ -50,6 +51,10 @@ Route::get('/user/logout',[UserController::class,'logout'])->name('user.logout')
 Route::get('/admin/login',[BackendUser::class,'login'])->name('admin.login');
 Route::post('/admin/login/post',[BackendUser::class,'loginPost'])->name('admin.login.post');
 
+
+Route::get('/payment/{id}',[Paymentcontroller::class,'paymentmethod'])->name('payment.method');
+    Route::post('/payment/post',[Paymentcontroller::class,'paymentstore'])->name('store.payment');
+
 Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
 
     Route::get('/', function () {
@@ -63,11 +68,12 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     
     Route::get('/all-products',[ProductController::class,'list'])->name('product.list');
     Route::get('/edit-products/{id}',[ProductController::class,'editproducts'])->name('edit.product');
+    Route::put('/update-products/{id}',[ProductController::class,'updateproducts'])->name('update.product');
     Route::get('/bidder/{id}',[ProductController::class,'bidderdetails'])->name('bidder.details');
     Route::get('/bidder/winner/{id}',[ProductController::class,'bidderapprove'])->name('bidder.approve');
+    Route::get('/delete/{id}',[ProductController::class,'deletepost'])->name('delete.post');
 
-
-
+ 
 
     Route::get('/customers',[BackendUser::class,'customerList'])->name('customer.list');
     Route::get('/view/customers/{id}',[BackendUser::class,'customerview'])->name('customer.view');
@@ -88,7 +94,11 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'],function(){
     Route::post('bid/datewise',[Reportcontroller::class,'datewisebid'])->name('date.bid');
 
 
-    Route::get('/payment',[Paymentcontroller::class,'paymentmethod'])->name('payment.method');
-    Route::post('/payment/post/{id}',[Paymentcontroller::class,'postpayment'])->name('post.payment');
+    // payment
+    Route::get('/show/payment',[BackendPaymentcontroller::class,'approvedpayment'])->name('payment.approve');
+    Route::get('/approve/payment/{id}',[BackendPaymentcontroller::class,'paymentapproved'])->name('seller.approve');
+
+
+    
 
 });

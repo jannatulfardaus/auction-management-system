@@ -21,7 +21,11 @@ class usercontroller extends Controller
     
      public function loginPost(Request $request)
     {   
-        $credentials=$request->except('_token');
+       
+        $credentials=[
+            'email'     => $request->email,
+            'password'  => $request->password,
+        ];
 
         if(Auth::attempt($credentials))
         {

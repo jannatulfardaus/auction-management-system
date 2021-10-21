@@ -61,12 +61,12 @@
                             
                             
         
-                            <input type="text" class="form-control" name="Category_name" placeholder="Enter Category name" style="background-color: lightgray">
+                            <input type="text" class="form-control" name="Category_name" placeholder="Enter Category name" style="background-color: black">
                             
                         
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea id="description" class="form-control" name="description" placeholder="Enter product description" style="background-color: lightgray" ></textarea>
+                            <textarea id="description" class="form-control" name="description" placeholder="Enter product description" style="background-color: black" ></textarea>
                         </div>
 
 

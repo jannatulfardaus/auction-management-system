@@ -19,26 +19,27 @@
                                </span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        
+
+                            @if(auth()->user()->role == 'admin')
+                        
+                            <li class="nav-item">
                             <a class="nav-link" href="{{route('dashboard')}}">
                                 <i class="fas fa-tachometer-alt"></i>
                                 <span>
                                 Dashboard
                                </span>
                             </a>
-                            
-
-                            @if(auth()->user()->role == 'admin')
-                        </li>
-                        
+                            </li> 
+                         
                               <li class="nav-item">
                                  <a class="nav-link " href="{{route('category.list')}}">
-                                  <i class="far fa-file-alt"></i>
-                                   <span>
-                                   Category 
-                                </span>
-                            </a> 
-                        </li>
+                                    <i class="far fa-file-alt"></i>
+                                    <span>
+                                    Category 
+                                    </span>
+                                </a> 
+                              </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('product.list')}}">
                                 <i class="fas fa-shopping-cart"></i>
@@ -72,7 +73,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('payment.method')}}">
+                            <a class="nav-link" href="{{route('payment.approve')}}">
                             <i class="fas fa-address-book"></i>
                                 Payment
                             </a>
@@ -91,13 +92,13 @@
                             <i class="fas fa-address-book"></i>
                                 User
                             </a>
-                        </li> 
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{route('user.bid')}}">
-                            <i class="fas fa-address-book"></i>
-                                Bid
-                            </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('payment.approve')}}">
+                            <i class="fas fa-address-book"></i>
+                                Payment
+                            </a>
+                        </li>  
                         @endif
                     </ul>
                     <ul class="navbar-nav">

@@ -23,7 +23,6 @@ class CreateProductsTable extends Migration
             $table->double('sold_price',10,2)->default(0.00);
             $table->date('expired_date');
             $table->string('image')->nullable();
-            $table->string('pro_buyer');
             $table->string('status',10)->default('pending');
             $table->timestamps();
         });

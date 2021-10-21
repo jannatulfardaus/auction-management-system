@@ -37,7 +37,7 @@
      </td>
      <td>
      @if($data->status == 'approved')
-        <a href="{{route('payment.method')}}" class="btn btn-success">Payment</a>
+        <a href="{{route('payment.method',$data->user->id)}}" class="btn btn-success">Payment</a>
     @endif
         
      </td>

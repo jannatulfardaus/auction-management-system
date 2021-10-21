@@ -1,62 +1,55 @@
-@extends('backend.main')
+@extends('Frontend.master')
 
-@section('content')
-<br> </br>
-<h3> Payment Records</h3>
+@section('contents')
+
+<h2>Payment </h2>
+        <form action="{{route('store.payment')}}" method="Post">
+            @csrf
+        <div class="col-md-6">
+       
+            <input value="{{$bid->id}}" type="hidden" name="bid_id" class="form-control" id="recipient-name">
 </div>
-@if(session()->has('message'))
-        <div class="row" style="padding: 10px;">
-            <span class="alert alert-primary">{{session()->get('message')}}</span>
-        </div>
-    @endif
+         
 
-<table class="table table-hover table-success">
- 
-      <br></br>
-      
-      <tr class="table-info">
-      <th>ID</th>
-<th>Rent ID</th>
-<th>Payment Type</th>
-<th>Amount</th>
-<th>User ID</th>
-<th>Month</th>
-<th>Payment Date</th>
-<th>Status</th>
-<th>Action</th>
-      </tr>
-  </thead>
-  <tbody>
-
-
-<tr class="table-danger">
-<th scope="row">
-
-<th scope="row"></th>
-  <th scope="row"></th>
-  <th scope="row"></th>
-  <th scope="row"></th>
-  <th scope="row"></th>
-  <th scope="row">}</th>
-  
-
-  <th scope="row"></th>
-  
-  
-  <td><a href="" > <i class="fas fa-check-double"></i></a></td>
- 
-  
-  
-  
-</tr>
-
-</thead>
-</tbody>
-</table>
+          <input type="hidden" name="user_id" value="{{$bid->product->user_id}}">
+          
+          <div class="col-md-5">
+            <label for="recipient-name" class="col-form-label">Amount:</label>
+            <input value="{$bid->amount}}" type="number" name="amount" class="form-control" id="recipient-name">
+          </div>
+          
+          <!-- <div class="col-md-4">
+            <label for="message-text" class="col-form-label">Month:</label>
+            <select required class="custom-select mr-sm-2" name="month" id="inlineFormCustomSelect">
+        <option selected>Choose...</option>
+        <option>January</option>
+        <option>February</option>
+        <option>March</option>
+        <option>April</option>
+        <option>May</option>
+        <option>June</option>
+        <option>July</option>
+        <option>August</option>
+        <option>September</option>
+        <option>October</option>
+        <option>November</option>
+        <option>December</option>
+      </select>
+          </div> -->
+          
+          <div class="col-md-3">
+            <label for="message-text" class="col-form-label">Pay at:</label>
+            <input type="date" value="{{date('Y-m-d')}}" min="{{date('Y-m-d')}}" name="date" class="form-control" id="recipient-name">
+          </div>
+          
+       <br></br>
+        <button type="submit" class="btn btn-success">Submit</button>
+     
+        </form>
+      </div>
+     
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</section>
 
 @endsection

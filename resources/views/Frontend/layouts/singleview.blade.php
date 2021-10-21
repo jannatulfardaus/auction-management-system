@@ -652,6 +652,9 @@ ul {
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-6">
+        @if(session()->has('success'))
+    <div class="alert alert-success">{{ session()->get('success') }}</div>
+@endif
             <div class="row">
              
             <div class="col-lg-3">
@@ -665,9 +668,9 @@ ul {
                         <div> <span class="product_price"></span> </div>
                         
                         <hr class="singleline">
-                        <div> <span class="product_info">Regular Price -{{$product->base_price}}<span><br> <span class="product_info">Starting bid-{{$product->sold_price}}<span><br> <span class="product_info">Description -{{$product->description}}<span><br><br> </div>
+                        <div> <span class="product_info">Starting Bid -{{$product->base_price}}<span><br> <span class="product_info">Regular Price-{{$product->sold_price}}<span><br> <span class="product_info">Description -{{$product->description}}<span><br><br> </div>
                         <div class="Expired_Date">Expired Date- {{$product->expired_date}}</div>
-                        @if($product->expired_date >= Carbon\Carbon::now())
+                        @if($product->expired_date > Carbon\Carbon::now())
                         <div>Bid Closed</div>
                         @else
                         <form action="{{route('bids')}}" method="post">
@@ -675,7 +678,10 @@ ul {
                             <div class="row">   
                                 <div class="col-xs-6"> 
                                     <button type="submit" class="btn btn-primary shop-button">Bid now</button>
+                                   
                                     <input type="number" min="{{$product->base_price}}" id="fname" name="price" value=""><br>
+
+                                   
                                     <input type="hidden" value = "{{$product->id}}" name="product_id">
                                     <div class="product_fav"><i class="fas fa-heart"></i></div>
                                 </div>

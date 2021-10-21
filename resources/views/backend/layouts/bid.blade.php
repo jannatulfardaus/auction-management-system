@@ -19,24 +19,22 @@
     </tr>
   </thead>
   <tbody>
-  @foreach($bids as $data)
+  @foreach($bids as$key=>$data)
 
   
     <tr>
-      <th scope="row">1</th>
+      <th scope="row">{{$key+1}}</th>
       <td>{{optional($data->user)->name}}</td>
-      <td>{{$data-> price}}</td>
+      <td>{{$data->price}}</td>
       <td>{{$data->status}} </td>
      <td>
                 
-     @if($maxPrice)
-        <a href="" class="btn btn-success">Payment</a>
-     @endif
+    
                 <a href="{{route('winner.bid',$data->id)}}" class="btn btn-primary">
                 
 
               
-                @endif -->
+                
                 @if($data->status == 'pending')
                                         <span class="label-custom label label-success"> Looser </span>
 

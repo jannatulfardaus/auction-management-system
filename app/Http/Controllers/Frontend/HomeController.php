@@ -14,7 +14,7 @@ class HomeController extends Controller
      
     public function home()
     {   
-        $products=Product::latest()->get()->take(6);
+        $products=Product::where('status', '=', 'approved')->latest()->get()->take(6);
         $category=catagories::all();
         // dd($products);
         return view('frontend.layouts.home',compact('products','category'));

@@ -56,7 +56,7 @@
 
                             </div>
                             <div class="left_part">
-                                <div class="shoes_price"> <span style="color: #ff4e5b;">Price-${{$data->base_price}}</span></div>
+                                <div class="shoes_price"> <span style="color: #ff4e5b;">Price-BDT{{$data->base_price}}</span></div>
                             </div>
                         </div>
                     </div>

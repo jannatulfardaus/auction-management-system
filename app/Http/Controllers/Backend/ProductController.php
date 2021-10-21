@@ -36,7 +36,7 @@ class ProductController extends Controller
             'description' =>$request->description,
             'base_price' =>$request->base_price,
             'sold_price' =>$request->sold_price,
-            'pro_buyer' =>$request->pro_buyer,
+            
             'expired_date'=>$request->expired_date,
             'image' =>$fileName,
             'user_id' => auth()->user()->id
@@ -55,10 +55,63 @@ class ProductController extends Controller
         return redirect()->back();
 
       } 
-      public function editproducts()
-      {
-          
+      public function editproducts($id)
+      {   $products=Product::find($id);
+        $categories=catagories::all();
+          return view('backend.layouts.product.edit',compact('products','categories'));
       }
+      public function updateproducts(Request $request,$id)
+      {     
+
+        $products=Product::find($id);
+          $fileName='';
+              if($request->hasFile('product_image'))
+              {
+                  $file=$request->file('product_image');
+                 //generate file name here
+                  $fileName=date('Ymdhms').'.'.$file->getClientOriginalExtension();
+                  $file->storeAs('/uploads',$fileName);
+              }
+          $products->update([
+              'name' => $request->Product_name,
+              'Category_id' => $request->Category_id,
+              'description' =>$request->description,
+              'base_price' =>$request->base_price,
+              'sold_price' =>$request->sold_price,
+              
+              'expired_date'=>$request->expired_date,
+              'image' =>$fileName,
+              'user_id' => auth()->user()->id
+              
+          ]);
+
+          return redirect()->route('product.list')->with('message','Product updated successfully.');
+         
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       public function bidderdetails($id)
       {
        
@@ -79,6 +132,21 @@ class ProductController extends Controller
         return redirect()->back();
 
       } 
+
+      public function deletepost($id)
+      {
+
+         //  dd($house_id);
+          $product=Product::find($id);
+         if($product)
+         {
+             $product->delete();
+             return redirect()->back()->with('message','Product Deleted successfully.');
+         }
+         return redirect()->back()->with('message','No poduct found to delete.');
+        }
+
+      
 
     
 
